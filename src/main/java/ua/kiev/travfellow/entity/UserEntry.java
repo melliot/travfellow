@@ -1,11 +1,11 @@
 package ua.kiev.travfellow.entity;
 
 public class UserEntry {
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    private int id;
+    private long id;
     private String name;
     private int age;
 
@@ -19,6 +19,10 @@ public class UserEntry {
 
     public int getAge() {
         return age;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setAge(int age) {

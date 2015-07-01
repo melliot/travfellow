@@ -6,6 +6,7 @@ import ua.kiev.travfellow.entity.UserEntry;
 public class UserEntryResource extends ResourceSupport {
     private String name;
 
+
     public String getName() {
         return name;
     }
