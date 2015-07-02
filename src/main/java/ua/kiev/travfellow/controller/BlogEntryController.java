@@ -23,7 +23,7 @@ public class BlogEntryController {
             method = RequestMethod.GET)
     public ResponseEntity<BlogEntryResource> getBlogEntry(
             @PathVariable Long blogEntryId) {
-        BlogEntry entry = service.find(blogEntryId);
+        BlogEntry entry = service.findBlogEntry(blogEntryId);
         if(entry != null)
         {
             BlogEntryResource res = new BlogEntryResourceAsm().toResource(entry);
@@ -37,7 +37,7 @@ public class BlogEntryController {
             method = RequestMethod.DELETE)
     public ResponseEntity<BlogEntryResource> deleteBlogEntry(
             @PathVariable Long blogEntryId) {
-        BlogEntry entry = service.delete(blogEntryId);
+        BlogEntry entry = service.deleteBlogEntry(blogEntryId);
 
         if(entry != null)
         {
@@ -52,7 +52,7 @@ public class BlogEntryController {
             method = RequestMethod.PUT)
     public ResponseEntity<BlogEntryResource> updateBlogEntry(
             @PathVariable Long blogEntryId, @RequestBody BlogEntryResource sentBlogEntry) {
-        BlogEntry updatedEntry = service.update(blogEntryId, sentBlogEntry.toBlogEntry());
+        BlogEntry updatedEntry = service.updateBlogEntry(blogEntryId, sentBlogEntry.toBlogEntry());
         if(updatedEntry != null)
         {
             BlogEntryResource res = new BlogEntryResourceAsm().toResource(updatedEntry);

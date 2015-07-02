@@ -7,7 +7,7 @@ public class UserEntry {
 
     private long id;
     private String name;
-    private int age;
+    private String pasword;
 
     public String getName() {
         return name;
@@ -17,15 +17,15 @@ public class UserEntry {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public String getPasword() {
+        return pasword;
     }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPasword(String pasword) {
+        this.pasword = pasword;
     }
 }

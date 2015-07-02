@@ -45,7 +45,7 @@ public class BlogEntryControllerTest {
         entry.setId(1L);
         entry.setTitle("Test Title");
 
-        when(service.find(1L)).thenReturn(entry);
+        when(service.findBlogEntry(1L)).thenReturn(entry);
 
         mockMvc.perform(get("/rest/blog-entries/1")).andDo(print())
                 .andExpect(jsonPath("$.title", is(entry.getTitle())))
@@ -55,7 +55,7 @@ public class BlogEntryControllerTest {
 
     @Test
     public void getNonExistingBlogEntry() throws Exception {
-        when(service.find(1L)).thenReturn(null);
+        when(service.findBlogEntry(1L)).thenReturn(null);
 
         mockMvc.perform(get("/rest/blog-entries/1"))
                 .andExpect(status().isNotFound());
@@ -67,7 +67,7 @@ public class BlogEntryControllerTest {
         deletedBlogEntry.setId(1L);
         deletedBlogEntry.setTitle("Test Title");
 
-        when(service.delete(1L)).thenReturn(deletedBlogEntry);
+        when(service.deleteBlogEntry(1L)).thenReturn(deletedBlogEntry);
 
         mockMvc.perform(delete("/rest/blog-entries/1"))
                 .andExpect(jsonPath("$.title", is(deletedBlogEntry.getTitle())))
@@ -77,7 +77,7 @@ public class BlogEntryControllerTest {
 
     @Test
     public void deleteNonExistingBlogEntry() throws Exception {
-        when(service.delete(1L)).thenReturn(null);
+        when(service.deleteBlogEntry(1L)).thenReturn(null);
 
         mockMvc.perform(delete("/rest/blog-entries/1"))
                 .andExpect(status().isNotFound());
@@ -89,7 +89,7 @@ public class BlogEntryControllerTest {
         updatedEntry.setId(1L);
         updatedEntry.setTitle("Test Title");
 
-        when(service.update(eq(1L), any(BlogEntry.class)))
+        when(service.updateBlogEntry(eq(1L), any(BlogEntry.class)))
                 .thenReturn(updatedEntry);
 
         mockMvc.perform(put("/rest/blog-entries/1")
@@ -102,7 +102,7 @@ public class BlogEntryControllerTest {
 
     @Test
     public void updateNonExistingBlogEntry() throws Exception {
-        when(service.update(eq(1L), any(BlogEntry.class)))
+        when(service.updateBlogEntry(eq(1L), any(BlogEntry.class)))
                 .thenReturn(null);
 
         mockMvc.perform(put("/rest/blog-entries/1")
