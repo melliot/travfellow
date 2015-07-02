@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.kiev.travfellow.entity.UserEntry;
@@ -35,9 +36,21 @@ public class UserEntryController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
     public ResponseEntity<UserEntryResource> updateUserEntry(
+            @PathVariable Long userId, @RequestBody UserEntryResource sendUserEntry)
+    {
+        UserEntry updatedUser = service.update(userId, sendUserEntry.toUserEntry());
+        if(updatedUser != null){
+            UserEntryResource res = new UserEntryResourceAsm().toResource(updatedUser);
+            return new ResponseEntity<UserEntryResource>(res, HttpStatus.OK);
+        }
+        return new ResponseEntity<UserEntryResource>(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
+    public ResponseEntity<UserEntryResource> deleteUserEntry(
             @PathVariable Long userId)
     {
-        UserEntry user = service.find(userId);
+        UserEntry user = service.delete(userId);
         if(user != null){
             UserEntryResource res = new UserEntryResourceAsm().toResource(user);
             return new ResponseEntity<UserEntryResource>(res, HttpStatus.OK);

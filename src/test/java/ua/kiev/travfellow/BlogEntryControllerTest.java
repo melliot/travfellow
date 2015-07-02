@@ -19,9 +19,11 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class BlogEntryControllerTest {
+
     @InjectMocks
     private BlogEntryController controller;
 
@@ -45,7 +47,7 @@ public class BlogEntryControllerTest {
 
         when(service.find(1L)).thenReturn(entry);
 
-        mockMvc.perform(get("/rest/blog-entries/1"))
+        mockMvc.perform(get("/rest/blog-entries/1")).andDo(print())
                 .andExpect(jsonPath("$.title", is(entry.getTitle())))
                 .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/blog-entries/1"))))
                 .andExpect(status().isOk());
@@ -58,7 +60,6 @@ public class BlogEntryControllerTest {
         mockMvc.perform(get("/rest/blog-entries/1"))
                 .andExpect(status().isNotFound());
     }
-
 
     @Test
     public void deleteExistingBlogEntry() throws Exception {

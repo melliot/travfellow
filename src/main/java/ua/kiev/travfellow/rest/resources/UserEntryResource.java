@@ -15,7 +15,7 @@ public class UserEntryResource extends ResourceSupport {
         this.name = name;
     }
 
-    public UserEntry toUserEntry(UserEntry userEntry){
+    public UserEntry toUserEntry(){
         UserEntry user = new UserEntry();
         user.setName(name);
         return user;

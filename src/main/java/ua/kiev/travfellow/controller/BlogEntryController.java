@@ -41,7 +41,6 @@ public class BlogEntryController {
 
         if(entry != null)
         {
-            System.out.println(entry.getTitle());
             BlogEntryResource res = new BlogEntryResourceAsm().toResource(entry);
             return new ResponseEntity<BlogEntryResource>(res, HttpStatus.OK);
         } else {
